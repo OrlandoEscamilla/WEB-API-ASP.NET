@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="my-form" action="" >
+        <input type="text" name="nombre" id="nombre"/>
+        <input type="text" name="cantidad" id="cantidad" />
+        /<!--<button type="submit" id="botonEnvio">Enviar</button>-->
+        <button class="btn btn-primary" id='upload'  data-loading-text="<i class='fa fa-spinner fa-spin '></i> Cargando">Cargar</button> 
+    </form>
+</body>
+
+<script>
+$(document).ready(function() {
+
+
+  $('#upload').click(function(e) {
+    e.preventDefault(); // Prevenir el envío del formulario por defecto
+    
+    // Obtener los datos del formulario
+   
+
+    var varNombre = $('#nombre').val();
+    var varCantidad = $('#cantidad').val();
+
+    var formData = {
+        'nombre' : varNombre,
+        'cantidad' : varCantidad
+
+    };
+    
+    // Enviar los datos del formulario mediante AJAX
+    $.ajax({
+      type: 'GET',
+      url: 'https://localhost:44318/Api/Values/GetTotal/',
+      
+      //data: formData,
+      success: function(response) {
+        // Aquí puedes manejar la respuesta del servidor
+        console.log(response);
+      },
+      error: function(error) {
+        // Aquí puedes manejar los errores de la petición
+        console.log(error);
+      }
+    });
+  });
+ 
+});
+</script>
+</html>
